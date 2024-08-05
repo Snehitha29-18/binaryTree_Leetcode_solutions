@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+        String fullTree = preOrdertraversal(root);
+        String subTree = preOrdertraversal(subRoot);
+        return (fullTree.contains(subTree));
+    }
+    String preOrdertraversal(TreeNode root){
+        if(root==null) return "null";
+        StringBuilder sb = new StringBuilder("^");
+        sb.append(root.val);
+        sb.append(preOrdertraversal(root.left));
+        sb.append(preOrdertraversal(root.right));
+        return sb.toString();  
+    }
+}
