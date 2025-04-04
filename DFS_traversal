@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int val) {
+        this.data = val;
+        left = right = null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating the binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        System.out.print("Inorder Traversal: ");
+        inOrder(root);
+        System.out.println();
+
+        System.out.print("Preorder Traversal: ");
+        preOrder(root);
+        System.out.println();
+
+        System.out.print("Postorder Traversal: ");
+        postOrder(root);
+        System.out.println();
+
+        System.out.print("Level Order Traversal: ");
+        levelOrder(root);
+        System.out.println();
+    }
+
+    static void inOrder(Node root) {
+        if (root == null) return;
+        inOrder(root.left);
+        System.out.print(root.data + " ");
+        inOrder(root.right);
+    }
+
+    static void preOrder(Node root) {
+        if (root == null) return;
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    static void postOrder(Node root) {
+        if (root == null) return;
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.print(root.data + " ");
+    }
+
+    static void levelOrder(Node root) {
+        if (root == null) return;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.print(current.data + " ");
+
+            if (current.left != null)
+                queue.offer(current.left);
+            if (current.right != null)
+                queue.offer(current.right);
+        }
+    }
+}
